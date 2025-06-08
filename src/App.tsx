@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
-const OPENAI_API_KEY = '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'; // 👈 Reemplaza con tu clave real
+const OPENAI_API_KEY = 'OPENAI_API_KEY'; // 👈 Reemplaza con tu clave real
 
 function App() {
   const [input, setInput] = useState('');
