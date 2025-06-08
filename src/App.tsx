@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
-const OPENAI_API_KEY = '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'; // 👈 Reemplaza con tu clave real
+const OPENAI_API_KEY = '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'; // 👈 Reemplaza con tu clave real
 
 function App() {
   const [input, setInput] = useState('');
