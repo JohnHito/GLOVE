@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendario - Proyecto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <header class="bg-blue-900 text-white py-4 px-6 flex justify-between items-center">
+    <a href="index.html"><img src="./imgs/GLOVElogo.png" alt="logo GLOVE"></a>
+
+    <nav class="flex items-center gap-8">
+      <a href="/signin.html" class="hover:underline">Vista Sign In</a>
+      <a href="/signup.html" class="hover:underline">Vista Sign Up</a>
+      <a href="/horario.html" class="hover:underline">Horario</a>
+      <a href="/calendario.html" class="hover:underline">Calendario</a>
+      <a href="/perfil.html" class="hover:underline">Nombre usuario</a>
+      <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+        <span class="text-purple-700 font-bold text-lg">🖐️</span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Dias de la semana -->
+  <main class="p-6 flex">
+    <div class="flex-grow">
+      <div class="grid grid-cols-8 gap-1 bg-blue-900 text-white text-center rounded-lg shadow-md">
+        <div class="p-3">Horas</div>
+        <div class="p-3">Lunes</div>
+        <div class="p-3">Martes</div>
+        <div class="p-3">Miércoles</div>
+        <div class="p-3">Jueves</div>
+        <div class="p-3">Viernes</div>
+        <div class="p-3">Sábado</div>
+        <div class="p-3">Domingo</div>
+      </div>
+
+      <!-- Horas -->
+      <div class="grid grid-cols-8 gap-1 mt-1">
+        <div class="col-span-1 bg-blue-900 text-white text-center rounded-lg shadow-md">
+          <div class="py-2">7:00</div>
+          <div class="py-2">8:00</div>
+          <div class="py-2">9:00</div>
+          <div class="py-2">10:00</div>
+          <div class="py-2">11:00</div>
+          <div class="py-2">12:00</div>
+          <div class="py-2">13:00</div>
+          <div class="py-2">14:00</div>
+          <div class="py-2">15:00</div>
+          <div class="py-2">16:00</div>
+          <div class="py-2">17:00</div>
+          <div class="py-2">18:00</div>
+          <div class="py-2">19:00</div>
+          <div class="py-2">20:00</div>
+          <div class="py-2">21:00</div>
+          <div class="py-2">22:00</div>
+        </div>
+
+        <!-- Relleno -->
+        <div class="col-span-7 grid grid-cols-7 gap-1">
+          <div class="col-span-7 h-full w-40">
+              <div class="border-b border-gray-300">Curso 01</div>
+              <div class="border-b border-gray-300">Curso 02</div>
+              <div class="border-b border-gray-300 h-5"></div>
+              <div class="border-b border-gray-300">Curso 03</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <aside class="w-1/4 flex flex-col items-center pt-10">
+      <button class="bg-blue-900 text-white rounded-xl text-2xl w-12 h-12 flex items-center justify-center mb-4 hover:bg-blue-800">+</button>
+      <hr class="border-gray-400 w-full mt-2" />
+    </aside>
+  </main>
+</body>
+</html>
