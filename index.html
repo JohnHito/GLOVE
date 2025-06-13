@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GLOVE - Tu Asistente de Horarios</title>
+  <title>GLOVE - Organización Universitaria Inteligente</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="bg-gray-100">
+
+<body class="font-inter bg-[#f0f4f8] text-gray-900">
 
   <!-- Header -->
-  <header class="bg-blue-900 text-white py-4 px-6 flex justify-between items-center">
-    <a href="index.html"><img src="./imgs/GLOVElogo.png" alt="logo GLOVE"></a>
+  <header class="bg-[#1e293b] text-white py-4 px-6 flex justify-between items-center">
+    <a href="index.html">
+      <img src="./imgs/GLOVElogo.png" alt="logo GLOVE">
+    </a>
 
     <nav class="flex items-center gap-8">
       <a href="/signin.html" class="hover:underline">Vista Sign In</a>
@@ -31,37 +30,48 @@
   </header>
 
   <!-- Hero -->
-  <section class="py-20 px-6 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-blue-900 text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
-        GLOVE
-      </h1>
-      <p class="text-blue-900 text-lg md:text-xl text-blue-100 mb-8">
-        Con GLOVE, diseña y ajusta tu horario universitario de forma rápida, visual e inteligente.
-      </p>
-      <a href="#" class="inline-block bg-blue-900 text-white font-bold py-4 px-8 rounded-full text-lg hover:scale-105 transition transform duration-300">
-        Empezar ahora
-      </a>
+  <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white">
+    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 items-center py-20 gap-8 px-6">
+      <!-- Texto -->
+      <div class="text-center lg:text-left space-y-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+          Planificá tu semestre <br> de forma visual e inteligente
+        </h1>
+        <p class="text-lg text-blue-200">
+          Optimiza tu horario, integra materias desde PDF y organiza tu semestre en minutos.
+        </p>
+        <a href="/signup.html" class="inline-block bg-white text-blue-900 font-semibold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition">
+          Comenzar gratis
+        </a>
+      </div>
+      <!-- Imagen mockup -->
+      <div class="flex justify-center">
+        <div class="w-64 h-40 md:w-80 md:h-48 rounded-lg shadow-xl flex flex-col overflow-hidden">
+          <div class="flex-1 bg-gray-100 flex items-center justify-center font-bold text-2xl">
+            <h1 class="text-blue-900">IMG AQUI</h1>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Beneficios -->
-  <section class="bg-blue-900 py-20 px-6">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-      <div>
-        <div class="text-4xl mb-4">🧠</div>
-        <h3 class="text-white text-xl font-semibold mb-2">Asistente inteligente</h3>
-        <p class="text-white text-sm">Nuestra API optimiza tu horario ideal en segundos.</p>
+  <section class="bg-[#1e293b] text-white py-16 px-6">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+      <div class="space-y-3">
+        <div class="text-5xl">🧠</div>
+        <h3 class="text-2xl font-semibold">Asistente inteligente</h3>
+        <p class="text-gray-300">Generá horarios optimizados en segundos con nuestra API.</p>
       </div>
-      <div>
-        <div class="text-4xl mb-4">📅</div>
-        <h3 class="text-white text-xl font-semibold mb-2">Diseño visual</h3>
-        <p class="text-white text-sm">Arrastra y suelta bloques para crear tu semana perfecta.</p>
+      <div class="space-y-3">
+        <div class="text-5xl">📅</div>
+        <h3 class="text-2xl font-semibold">Diseño visual</h3>
+        <p class="text-gray-300">Arrastrá y organizá bloques con una interfaz clara.</p>
       </div>
-      <div>
-        <div class="text-4xl mb-4">📥</div>
-        <h3 class="text-white text-xl font-semibold mb-2">Carga desde PDF</h3>
-        <p class="text-white text-sm">Sube tu archivo de matrícula y genera el horario al instante.</p>
+      <div class="space-y-3">
+        <div class="text-5xl">📥</div>
+        <h3 class="text-2xl font-semibold">Carga desde PDF</h3>
+        <p class="text-gray-300">Subí tu archivo de matrícula y obtené tu horario al instante.</p>
       </div>
     </div>
   </section>
