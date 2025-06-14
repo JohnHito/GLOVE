@@ -1,11 +1,11 @@
-import type { CourseData } from "./CourseCard";
+import type {ScheduleSegmentProps} from "./ScheduleSegment";
 //import CourseCard from './CourseCard';
 
 interface ScheduleProps {
   style: string;
   header: string[];
   hours: string[];
-  //data: CourseData[][];
+  data: ScheduleSegmentProps[];
 }
 
 export default function Schedule(props: ScheduleProps) {
@@ -16,6 +16,7 @@ export default function Schedule(props: ScheduleProps) {
         <div>Contenedor
 
           <div>Columna horas</div>
+          
           <div>Aqui Irian los cursos</div>
 
         </div>
