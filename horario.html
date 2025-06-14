@@ -70,10 +70,42 @@
     </div>
 
     <!-- Botón -->
-    <aside class="w-1/4 flex flex-col items-center pt-10">
-      <button class="bg-blue-900 text-white rounded-xl text-2xl w-12 h-12 flex items-center justify-center mb-4 hover:bg-blue-800">+</button>
-      <hr class="border-gray-400 w-full mt-2" />
-    </aside>
+    <aside class="w-full max-w-md flex flex-col gap-3 pl-5">
+  <!-- Botones en fila -->
+  <div class="flex flex-row items-start justify-start gap-5 h-20">
+    <!-- Botón Upload PDF -->
+    <div class="flex-shrink-0">
+      <button aria-label="Subir PDF" class="flex flex-col items-center justify-center bg-[#1e3a8a] text-white px-3 py-2 rounded-xl w-[90px] h-[72px] hover:bg-[#2c489e] transition duration-200 ease-in-out shadow-sm">
+        <span class="text-xl leading-none mb-1">📤</span>
+        <span class="font-medium text-[11px] text-center leading-tight">Upload PDF</span>
+      </button>
+    </div>
+
+    <!-- Contenedor List Courses y asd -->
+    <div class="flex justify-around items-center bg-[#3275d3] text-white px-4 py-2 rounded-xl w-full h-[72px] hover:bg-[#3e82e0] transition duration-200 ease-in-out shadow-sm">
+      <!-- List Courses -->
+      <div class="flex flex-col items-center px-2">
+        <span class="text-xl leading-none mb-1">📋</span>
+        <span class="font-medium text-[11px] text-center leading-tight">List Courses</span>
+      </div>
+
+      <!-- asd -->
+      <div class="flex flex-col items-center px-2">
+        <span class="text-xl leading-none mb-1">🔄</span>
+        <span class="font-medium text-[11px] text-center leading-tight">asd</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Línea divisoria horizontal -->
+  <hr class="border-blue-900 w-full mt-2" />
+</aside>
+
+
+
+
+
+
   </main>
 </body>
 </html>
