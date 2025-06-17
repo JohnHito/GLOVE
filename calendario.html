@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendario - Proyecto</title>
+  <title>Calendario</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-white font-sans">
 
   <header class="bg-blue-900 text-white py-4 px-6 flex justify-between items-center">
     <a href="index.html"><img src="./imgs/GLOVElogo.png" alt="logo GLOVE"></a>
@@ -25,38 +25,39 @@
   </header>
 
   <!-- Contenido principal -->
-  <main class="flex px-8 py-10 gap-8">
+  <main class="flex px-8 py-6 gap-8">
 
     <!-- Calendario -->
-    <section class="flex-1 bg-gray-200 rounded-xl p-6 shadow-sm">
-      <div class="flex justify-between items-center mb-4">
-        <button class="bg-white text-blue-900 rounded-full pb-1 pl-2 pr-2 shadow hover:bg-blue-100">&larr;</button>
-        <h2 class="text-lg font-semibold">Mes 2025</h2>
-        <button class="bg-white text-blue-900 rounded-full pb-1 pl-2 pr-2 shadow hover:bg-blue-100">&rarr;</button>
-      </div>
-
-      <!-- Días de la semana -->
-      <div class="grid grid-cols-7 text-left text-sm font-semibold text-gray-600 mb-5 ml-10">
-        <div>LUN</div><div>MAR</div><div>MIÉR</div><div>JUE</div><div>VIE</div><div>SÁB</div><div>DOM</div>
-      </div>
-
-      <!-- Fechas -->
-      <div class="grid grid-cols-7 text-left text-gray-700 text-sm gap-y-20 ml-10">
-        
-        <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
-        <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
-        <div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div>
-        <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
-        <div class="text-gray-400">29</div><div class="text-gray-400">30</div><div class="text-gray-400">31</div>
-        <div class="text-gray-400">1</div><div class="text-gray-400">2</div><div class="text-gray-400">3</div><div class="text-gray-400">4</div>
-      </div>
+    <section class="flex-1 bg-gray-200 rounded-xl shadow-sm">
+      <img src="imgs/preview-calendario.png" alt="preview-calendario">
     </section>
 
     <!-- Botón -->
-    <aside class="w-1/4 flex flex-col items-center pt-10">
-      <button class="bg-blue-900 text-white rounded-xl text-2xl w-12 h-12 flex items-center justify-center mb-4 hover:bg-blue-800">+</button>
-      <hr class="border-gray-400 w-full mt-2" />
-    </aside>
+    <aside class="w-full max-w-md flex flex-col gap-3 pl-1">
+  <div class="bg-blue-900 text-white rounded-xl flex items-center gap-4 px-4 py-4">
+    
+    <!-- Ícono y texto "List Courses" -->
+    <div class="flex flex-col items-center justify-center">
+      <span class="text-xl leading-none">📋</span>
+      <span class="text-xs font-semibold">List Courses</span>
+    </div>
+
+    <!-- Input de texto -->
+    <input 
+      type="text" 
+      placeholder="Agregar..." 
+      class="flex-grow rounded-full px-6 py-2 text-sm bg-white text-black focus:outline-none"
+    />
+
+    <!-- Botón de agregar -->
+    <button class="w-10 h-10 border border-white rounded-md flex items-center justify-center text-lg hover:bg-blue-800">+</button>
+
+  </div>
+  
+  <!-- Línea divisoria -->
+  <hr class="border-blue-900 w-full mt-4" />
+</aside>
+
 
   </main>
 
