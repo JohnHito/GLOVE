@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -13,9 +14,8 @@ function RouteComponent() {
         </a>
 
         <nav className="flex items-center gap-8">
-          <a href="/signin.html" className="hover:underline">
-            Vista Sign In
-          </a>
+          <Link to="/" className="hover:underline">Vista Sign In </Link>
+
           <a href="/signup.html" className="hover:underline">
             Vista Sign Up
           </a>
@@ -102,7 +102,7 @@ function RouteComponent() {
           <div className="space-y-3">
             <div className="text-5xl">📥</div>
             <h3 className="text-2xl font-semibold">Carga desde PDF</h3>
-            <p className="text-gray-300">
+            <p className="text-gray-300 fa-cloud-moon-rain">
               Subí tu archivo de matrícula y obtené tu horario al instante.
             </p>
           </div>
