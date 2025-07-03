@@ -1,11 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import NavVar from "../components/ui/NavVar";
+import Schedule from "../components/ui/Schedule";
 
 export const Route = createFileRoute("/horario")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  // Ejemplo de cursos para el horario
+  const exampleCourses = [
+    { day: 0, startHour: 7, endHour: 11, name: "Matemática", color: "#2563eb" },
+    { day: 2, startHour: 10, endHour: 12, name: "Programación", color: "#38a169" },
+    { day: 4, startHour: 14, endHour: 17, name: "Física", color: "#e53e3e" },
+    { day: 1, startHour: 8, endHour: 10, name: "Inglés", color: "#d97706" },
+  ];
   return (
     <div>
       <header className="bg-blue-900 text-white py-4 px-6 flex justify-between items-center">
@@ -24,49 +32,8 @@ function RouteComponent() {
         />
       </header>
 
-      <main className="p-6 flex">
-        <div className="flex-grow">
-          <div className="grid grid-cols-8 gap-1 bg-blue-900 text-white text-center rounded-lg shadow-md">
-            <div className="p-3">Horas</div>
-            <div className="p-3">Lunes</div>
-            <div className="p-3">Martes</div>
-            <div className="p-3">Miércoles</div>
-            <div className="p-3">Jueves</div>
-            <div className="p-3">Viernes</div>
-            <div className="p-3">Sábado</div>
-            <div className="p-3">Domingo</div>
-          </div>
-
-          <div className="grid grid-cols-8 gap-1 mt-1">
-            <div className="col-span-1 bg-blue-900 text-white text-center rounded-lg shadow-md">
-              <div className="py-2">7:00</div>
-              <div className="py-2">8:00</div>
-              <div className="py-2">9:00</div>
-              <div className="py-2">10:00</div>
-              <div className="py-2">11:00</div>
-              <div className="py-2">12:00</div>
-              <div className="py-2">13:00</div>
-              <div className="py-2">14:00</div>
-              <div className="py-2">15:00</div>
-              <div className="py-2">16:00</div>
-              <div className="py-2">17:00</div>
-              <div className="py-2">18:00</div>
-              <div className="py-2">19:00</div>
-              <div className="py-2">20:00</div>
-              <div className="py-2">21:00</div>
-              <div className="py-2">22:00</div>
-            </div>
-
-            <div className="col-span-7 grid grid-cols-7 gap-1">
-              <div className="col-span-7 h-full w-40">
-                <div className="border-b border-gray-300">Curso 01</div>
-                <div className="border-b border-gray-300">Curso 02</div>
-                <div className="border-b border-gray-300 h-5"></div>
-                <div className="border-b border-gray-300">Curso 03</div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <main className="p-6 flex flex-col gap-8">
+        <Schedule courses={exampleCourses} />
 
         <aside className="w-full max-w-md flex flex-col gap-3 pl-8">
           <div className="flex flex-row items-start justify-start gap-5 h-20">
