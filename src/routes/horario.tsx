@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import NavVar from "../components/ui/NavVar";
 
 export const Route = createFileRoute("/horario")({
   component: RouteComponent,
@@ -12,26 +13,16 @@ function RouteComponent() {
           <img src="./imgs/GLOVElogo.png" alt="logo GLOVE" />
         </a>
 
-        <nav className="flex items-center gap-8">
-          <a href="/signin.html" className="hover:underline">
-            Vista Sign In
-          </a>
-          <a href="/signup.html" className="hover:underline">
-            Vista Sign Up
-          </a>
-          <a href="/horario.html" className="hover:underline">
-            Horario
-          </a>
-          <a href="/calendario.html" className="hover:underline">
-            Calendario
-          </a>
-          <a href="/perfil.html" className="hover:underline">
-            Nombre usuario
-          </a>
-          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-            <span className="text-purple-700 font-bold text-lg">🖐️</span>
-          </div>
-        </nav>
+        <NavVar
+          header={[
+            "Vista Sign In",
+            "Vista Sign Up",
+            "Horario",
+            "Calendario",
+            "Nombre usuario",
+          ]}
+          buttons={[]}
+        />
       </header>
 
       <main className="p-6 flex">
