@@ -14,20 +14,26 @@ function RouteComponent() {
         </a>
 
         <nav className="flex items-center gap-8">
-          <Link to="/" className="hover:underline">Vista Sign In </Link>
+          <Link to="/signin" className="hover:underline">
+            Vista Sign In{" "}
+          </Link>
 
-          <a href="/signup.html" className="hover:underline">
-            Vista Sign Up
-          </a>
-          <a href="/horario.html" className="hover:underline">
-            Horario
-          </a>
-          <a href="/calendario.html" className="hover:underline">
-            Calendario
-          </a>
-          <a href="/perfil.html" className="hover:underline">
-            Nombre usuario
-          </a>
+          <Link to="/signup" className="hover:underline">
+            Vista Sign Up{" "}
+          </Link>
+
+          <Link to="/horario" className="hover:underline">
+            Horario{" "}
+          </Link>
+
+          <Link to="/calendario" className="hover:underline">
+            Calendario{" "}
+          </Link>
+
+          <Link to="/perfil" className="hover:underline">
+            Nombre de usuario{" "}
+          </Link>
+
           <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
             <span className="text-purple-700 font-bold text-lg">🖐️</span>
           </div>

@@ -1,8 +1,8 @@
-import type { CourseData } from './CourseCard';
+import type { CourseCard } from './CourseCard';
 
 export interface ScheduleSegmentProps {
     style: string;
-    course: CourseData;
+    course: typeof CourseCard;
 }
 
 export default function ScheduleSegment(props: ScheduleSegmentProps) {
