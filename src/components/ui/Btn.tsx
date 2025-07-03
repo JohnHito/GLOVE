@@ -24,6 +24,7 @@ Segun la ia, ahora los podemos importar asi en el html:
 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-*/
 
 import React from "react";
+import { Link } from "@tanstack/react-router";
 
 interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -32,6 +33,7 @@ interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   iconLeft?: string;
   iconRight?: string;
+  link?: string;
 }
 
 export default function Btn({
@@ -59,9 +61,11 @@ export default function Btn({
 
   const widthClass = fullWidth ? "w-full" : "";
   const flexClass = iconLeft || iconRight ? "flex items-center justify-center gap-2" : "";
+  const baseClass = "inline-block appearance-none focus:outline-none text-center justify-center";
 
   // Concatenar las clases usando template strings, filter y join
   const classes = [
+    baseClass,
     variantClasses[variant],
     sizeClasses[size],
     widthClass,
@@ -69,6 +73,15 @@ export default function Btn({
     className
   ].filter(Boolean).join(' ');
 
+  if (props.link) {
+    return (
+      <Link to={props.link} className={classes}>
+        {iconLeft && <img src={iconLeft} alt="" className="w-5 h-5" />}
+        {text}
+        {iconRight && <img src={iconRight} alt="" className="w-5 h-5" />}
+      </Link>
+    );
+  }
   return (
     <button className={classes} {...props}>
       {iconLeft && <img src={iconLeft} alt="" className="w-5 h-5" />}
