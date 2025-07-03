@@ -27,7 +27,7 @@ const [activo, setActivo] = useState(false);
 
 <ToggleSwitch
   checked={activo}
-  onChange={setActivo}
+  onChange={setActivo}F
   label="Notificaciones"
   variant="primary"
   fullWidth

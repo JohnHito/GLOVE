@@ -17,7 +17,6 @@ export default function CourseCard(props: CourseData) {
   );
 }*/
 
-
 import React from "react";
 
 export interface CourseCardProps {
@@ -57,7 +56,9 @@ export const CourseCard: React.FC<CourseCardProps> = ({
     >
       <div style={{ fontSize: 13, fontWeight: "bold" }}>{code}</div>
       <div style={{ fontSize: 17, fontWeight: 700 }}>{name}</div>
-      <div style={{ fontSize: 12, fontWeight: 500, marginBottom: 4 }}>{group}</div>
+      <div style={{ fontSize: 12, fontWeight: 500, marginBottom: 4 }}>
+        {group}
+      </div>
       <div>
         {schedule.map((h, i) => (
           <div key={i} style={{ fontSize: 12, lineHeight: 1.1 }}>

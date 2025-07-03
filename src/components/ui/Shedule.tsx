@@ -12,11 +12,11 @@ export default function Schedule(props: ScheduleProps) {
   return (
     <div className={props.style}>
       <div>Lunes martes...</div>
-      
-      <div>Contenedor
+
+      <div>
+        Contenedor
         <div>Columna horas</div>
         <div>Aqui Irian los cursos</div>
-      
       </div>
     </div>
   );

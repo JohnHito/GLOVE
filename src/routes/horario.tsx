@@ -15,13 +15,12 @@ function RouteComponent() {
 
         <NavVar
           header={[
-            "Vista Sign In",
-            "Vista Sign Up",
-            "Horario",
-            "Calendario",
-            "Nombre usuario",
+            { text: "Vista Sign In", to: "/signin" },
+            { text: "Vista Sign Up", to: "/signup" },
+            { text: "Horario", to: "/horario" },
+            { text: "Calendario", to: "/calendario" },
+            { text: "Nombre usuario", to: "/perfil" },
           ]}
-          buttons={[]}
         />
       </header>
 

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
+//import { Link } from "@tanstack/react-router";
+import NavVar from "../components/ui/NavVar";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -13,31 +14,15 @@ function RouteComponent() {
           <img src="./imgs/GLOVElogo.png" alt="logo GLOVE" />
         </a>
 
-        <nav className="flex items-center gap-8">
-          <Link to="/signin" className="hover:underline">
-            Vista Sign In{" "}
-          </Link>
-
-          <Link to="/signup" className="hover:underline">
-            Vista Sign Up{" "}
-          </Link>
-
-          <Link to="/horario" className="hover:underline">
-            Horario{" "}
-          </Link>
-
-          <Link to="/calendario" className="hover:underline">
-            Calendario{" "}
-          </Link>
-
-          <Link to="/perfil" className="hover:underline">
-            Nombre de usuario{" "}
-          </Link>
-
-          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-            <span className="text-purple-700 font-bold text-lg">🖐️</span>
-          </div>
-        </nav>
+        <NavVar
+          header={[
+            { text: "Vista Sign In", to: "/signin" },
+            { text: "Vista Sign Up", to: "/signup" },
+            { text: "Horario", to: "/horario" },
+            { text: "Calendario", to: "/calendario" },
+            { text: "Nombre usuario", to: "/perfil" },
+          ]}
+        />
       </header>
 
       <section className="bg-white text-blue-900">

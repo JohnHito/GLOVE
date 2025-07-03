@@ -48,8 +48,10 @@ export default function Btn({
 }: BtnProps) {
   const variantClasses = {
     primary: "bg-blue-900 text-white hover:bg-blue-800 font-semibold",
-    secondary: "bg-white text-blue-900 border border-blue-900 hover:bg-blue-100",
-    outline: "bg-transparent text-blue-900 border border-blue-900 hover:bg-blue-100",
+    secondary:
+      "bg-white text-blue-900 border border-blue-900 hover:bg-blue-100",
+    outline:
+      "bg-transparent text-blue-900 border border-blue-900 hover:bg-blue-100",
     icon: "bg-blue-900 text-white hover:bg-blue-800",
   };
 
@@ -60,8 +62,10 @@ export default function Btn({
   };
 
   const widthClass = fullWidth ? "w-full" : "";
-  const flexClass = iconLeft || iconRight ? "flex items-center justify-center gap-2" : "";
-  const baseClass = "inline-block appearance-none focus:outline-none text-center justify-center";
+  const flexClass =
+    iconLeft || iconRight ? "flex items-center justify-center gap-2" : "";
+  const baseClass =
+    "inline-block appearance-none focus:outline-none text-center justify-center";
 
   // Concatenar las clases usando template strings, filter y join
   const classes = [
@@ -70,8 +74,10 @@ export default function Btn({
     sizeClasses[size],
     widthClass,
     flexClass,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   if (props.link) {
     return (

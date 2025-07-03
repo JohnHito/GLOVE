@@ -64,20 +64,22 @@ export default function TxtField({
 
   return (
     <div className={`mb-4 ${widthClass}`}>
-      {label && <label className="block mb-1 text-gray-700 text-sm">{label}</label>}
+      {label && (
+        <label className="block mb-1 text-gray-700 text-sm">{label}</label>
+      )}
 
       <div className={`relative flex items-center`}>
-        {iconLeft && (
-          <span className="absolute left-3">{iconLeft}</span>
-        )}
+        {iconLeft && <span className="absolute left-3">{iconLeft}</span>}
         <input
           className={[
             variantClasses[variant],
             widthClass,
             iconLeft ? "pl-10" : "",
             error ? "border border-red-500" : "",
-            className
-          ].filter(Boolean).join(" ")}
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ")}
           {...props}
         />
       </div>
