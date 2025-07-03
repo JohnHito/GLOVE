@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import NavVar from "../components/ui/NavVar";
+import Calendar from "../components/ui/Calendar";
 
 export const Route = createFileRoute("/calendario")({
   component: RouteComponent,
@@ -26,7 +27,9 @@ function RouteComponent() {
 
       <main className="flex px-8 py-6 gap-8">
         <section className="flex-1 bg-gray-200 rounded-xl shadow-sm">
-          <img src="imgs/preview-calendario.png" alt="preview-calendario" />
+          <Calendar
+          view="dayGridMonth"
+          />
         </section>
 
         <aside className="w-full max-w-md flex flex-col gap-3 pl-1">
