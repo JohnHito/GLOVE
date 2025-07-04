@@ -1,28 +1,3 @@
-/*interface BtnProps {
-  text: string;
-  style: string;
-  icon?: string;
-}
-
-export default function Btn(props: BtnProps) {
-  return <button className={props.style}>{props.text}
-
-  {props.icon && <img src={props.icon} alt="" className="w-4 h-4 mr-2" />}
-
-  </button>;
-}*/
-
-/*-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
-Segun la ia, ahora los podemos importar asi en el html:
-
-<Btn text="Ingresar" variant="primary" size="lg" fullWidth />
-<Btn text="Cancelar" variant="secondary" size="md" />
-<Btn text="Google" variant="primary" iconLeft="/icons/google.svg" />
-<Btn text="Ver más" variant="outline" size="md" /> 
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-*/
-
 import React from "react";
 import { Link } from "@tanstack/react-router";
 

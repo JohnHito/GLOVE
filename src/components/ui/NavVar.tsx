@@ -1,19 +1,3 @@
-/*-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
-Segun la ia, ahora los podemos importar asi en el html:
-<NavVar
-  header={[
-    "Vista Sign In",
-    "Vista Sign Up",
-    "Horario",
-    "Calendario",
-    "Nombre usuario"
-  ]}
-  buttons={[]}
-/>
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-*/
-
 import React from "react";
 import { useLocation } from "@tanstack/react-router"; // Ajusta según el router que uses
 import NavVarBtn from "./NavVarBtn";

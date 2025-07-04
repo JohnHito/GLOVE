@@ -10,7 +10,13 @@ function RouteComponent() {
   // Ejemplo de cursos para el horario
   const exampleCourses = [
     { day: 0, startHour: 7, endHour: 11, name: "Matemática", color: "#2563eb" },
-    { day: 2, startHour: 10, endHour: 12, name: "Programación", color: "#38a169" },
+    {
+      day: 2,
+      startHour: 10,
+      endHour: 12,
+      name: "Programación",
+      color: "#38a169",
+    },
     { day: 4, startHour: 14, endHour: 17, name: "Física", color: "#e53e3e" },
     { day: 1, startHour: 8, endHour: 10, name: "Inglés", color: "#d97706" },
   ];
