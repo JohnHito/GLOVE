@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Btn from "../components/ui/Btn";
+import TxtField from "../components/ui/TxtField";
 
 export const Route = createFileRoute("/signin")({
   component: RouteComponent,
@@ -14,16 +15,16 @@ function RouteComponent() {
         </h2>
 
         <form className="space-y-8">
-          <input
+          <TxtField
             type="email"
             placeholder="Correo el electrónico"
-            className="w-full bg-gray-100 rounded-md p-3 text-sm outline-none"
+            fullWidth
           />
-          <div>
-            <input
+          <div className="pt-8">
+            <TxtField
               type="password"
               placeholder="Contraseña"
-              className="w-full bg-gray-100 rounded-md p-3 text-sm outline-none"
+              fullWidth
             />
             <div className="text-right mt-1">
               <a href="#" className="text-orange-500 text-sm hover:underline">

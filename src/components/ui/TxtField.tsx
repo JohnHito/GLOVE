@@ -26,11 +26,10 @@ export default function TxtField({
   const widthClass = fullWidth ? "w-full" : "";
 
   return (
-    <div className={`mb-4 ${widthClass}`}>
+    <div className={widthClass} style={{ marginBottom: 0 }}>
       {label && (
         <label className="block mb-1 text-gray-700 text-sm">{label}</label>
       )}
-
       <div className={`relative flex items-center`}>
         {iconLeft && <span className="absolute left-3">{iconLeft}</span>}
         <input
@@ -43,6 +42,11 @@ export default function TxtField({
           ]
             .filter(Boolean)
             .join(" ")}
+          style={{
+            marginBottom: 0,
+            marginTop: 0,
+            alignSelf: "center",
+          }}
           {...props}
         />
       </div>

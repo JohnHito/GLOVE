@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 //import { Link } from "@tanstack/react-router";
 import NavVar from "../components/ui/NavVar";
-
+import Btn from "../components/ui/Btn";
 export const Route = createFileRoute("/")({
   component: RouteComponent,
 });
@@ -36,12 +36,12 @@ function RouteComponent() {
             semestre en minutos.
           </p>
 
-          <a
-            href="/signup.html"
-            className="bg-blue-900 text-white px-8 py-3 rounded-md font-bold hover:bg-blue-800 w-fit mx-auto"
-          >
-            Comenzar gratis
-          </a>
+          <Btn
+            text="Comenzar gratis"
+            variant="primary"
+            size="lg"
+            link="/signup"
+          />
         </div>
       </section>
 

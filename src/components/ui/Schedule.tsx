@@ -16,16 +16,18 @@ const Schedule: React.FC<ScheduleProps> = ({ courses }) => {
         className="grid border rounded-lg bg-white"
         style={{
           gridTemplateColumns: `80px repeat(7, 1fr)`,
-          gridTemplateRows: `repeat(${hours.length}, 40px)`
+          gridTemplateRows: `40px repeat(${hours.length}, 40px)` // +1 row for header
         }}
       >
-        {/* Horas */}
-        {hours.map((h, i) => (
-          <div key={h} className="border-b border-gray-200 text-xs flex items-center justify-center font-semibold bg-blue-50" style={{ gridColumn: 1, gridRow: i + 1 }}>{h}:00</div>
-        ))}
+        {/* Esquina superior izquierda */}
+        <div className="bg-blue-200 text-xs flex items-center justify-center font-bold border-b border-gray-200 border-r" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
         {/* Días */}
         {days.map((d, i) => (
           <div key={d} className="border-b border-gray-200 text-xs flex items-center justify-center font-semibold bg-blue-100" style={{ gridColumn: i + 2, gridRow: 1 }}>{d}</div>
+        ))}
+        {/* Horas */}
+        {hours.map((h, i) => (
+          <div key={h} className="border-b border-gray-200 text-xs flex items-center justify-center font-semibold bg-blue-50" style={{ gridColumn: 1, gridRow: i + 2 }}>{h}:00</div>
         ))}
         {/* Cursos */}
         {courses.map((c, i) => (

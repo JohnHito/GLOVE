@@ -26,6 +26,7 @@ const ScheduleSegment: React.FC<ScheduleSegmentProps> = ({
         background: color || "#2563eb",
         zIndex: 1,
         opacity: 0.95,
+        margin: "2px", // padding visual entre bloques
       }}
     >
       {name}

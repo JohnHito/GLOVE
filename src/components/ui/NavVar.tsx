@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "@tanstack/react-router"; // Ajusta según el router que uses
 import NavVarBtn from "./NavVarBtn";
+import ProfileAvatar from "./ProfileAvatar";
 
 interface NavVarProps {
   style?: string;
@@ -33,9 +34,7 @@ export default function NavVar(props: NavVarProps) {
       {props.buttons?.map((btnProps, idx) => (
         <NavVarBtn key={idx} {...btnProps} />
       ))}
-      <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-        <span className="text-purple-700 font-bold text-lg">🖐️</span>
-      </div>
+      <ProfileAvatar />
     </nav>
   );
 }

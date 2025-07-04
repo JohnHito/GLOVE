@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Btn from "../components/ui/Btn";
+import TxtField from "../components/ui/TxtField";
 
 export const Route = createFileRoute("/signup")({
   component: RouteComponent,
@@ -25,21 +26,20 @@ function RouteComponent() {
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Crear cuenta</h2>
 
         <form className="space-y-8">
-          <input
-            type="email"
-            placeholder="Correo electrónico"
-            className="w-full bg-gray-100 rounded-md p-3 text-sm outline-none"
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            className="w-full bg-gray-100 rounded-md p-3 text-sm outline-none"
-          />
-          <input
+          <TxtField type="email" placeholder="Correo electrónico" fullWidth />
+          <div className="pt-8">
+            <TxtField 
+            type="password" 
+            placeholder="Contraseña" 
+            fullWidth />
+          </div>
+          <TxtField
             type="password"
             placeholder="Confirmar contraseña"
-            className="w-full bg-gray-100 rounded-md p-3 text-sm outline-none"
+            fullWidth
           />
+
+          <div></div>
           <Btn
             link="/horario"
             text="Ingresar"
