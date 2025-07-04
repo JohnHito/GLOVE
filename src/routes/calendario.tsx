@@ -20,14 +20,12 @@ function RouteComponent() {
   return (
     <div>
       <header className="bg-blue-900 text-white py-4 px-6 flex justify-between items-center">
-        <a href="index.html">
+        <a href="#">
           <img src="./imgs/GLOVElogo.png" alt="logo GLOVE" />
         </a>
 
         <NavVar
           header={[
-            { text: "Vista Sign In", to: "/signin" },
-            { text: "Vista Sign Up", to: "/signup" },
             { text: "Horario", to: "/horario" },
             { text: "Calendario", to: "/calendario" },
             { text: "Nombre usuario", to: "/perfil" },
