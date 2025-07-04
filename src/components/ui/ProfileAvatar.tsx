@@ -19,6 +19,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({ src, alt = "Foto de perfi
         alt={alt}
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
         loading="lazy"
+        //onClick={() => setShowPdfPopup(true)}
       />
     </div>
   );

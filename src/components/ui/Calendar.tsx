@@ -97,8 +97,8 @@ const Calendar: React.FC<CalendarProps> = ({ view }) => {
         view === "dayGridMonth"
           ? "month"
           : view === "dayGridWeek"
-          ? "week"
-          : "day"
+            ? "week"
+            : "day"
       }
     >
       <div className="flex items-center justify-between gap-4 mb-4">

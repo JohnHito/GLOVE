@@ -14,7 +14,13 @@ function RouteComponent() {
   // Ejemplo de cursos para el horario
   const exampleCourses = [
     { day: 0, startHour: 7, endHour: 11, name: "Matemática", color: "#2563eb" },
-    { day: 0, startHour: 11, endHour: 21, name: "Programación", color: "#38a169" },
+    {
+      day: 0,
+      startHour: 11,
+      endHour: 21,
+      name: "Programación",
+      color: "#38a169",
+    },
     { day: 4, startHour: 14, endHour: 17, name: "Física", color: "#e53e3e" },
     { day: 1, startHour: 8, endHour: 10, name: "Inglés", color: "#d97706" },
   ];
@@ -37,18 +43,21 @@ function RouteComponent() {
       </header>
 
       <main className="p-6 flex flex-col gap-8">
-        <Schedule courses={exampleCourses} />
-        <aside className="w-full max-w-md flex flex-col gap-3 pl-8">
-          <div className="flex flex-row items-start justify-start gap-5 h-20">
-            <Btn
-              text="Upload PDF"
-              variant="primary"
-              size="lg"
-              onClick={() => setShowPdfPopup(true)}
-            />
-          </div>
-          <hr className="border-blue-900 w-full mt-2" />
-        </aside>
+        <div className="flex items-start gap-5">
+          <Schedule courses={exampleCourses} />
+          <aside className="w-full max-w-md flex flex-col gap-3">
+            <div className="flex flex-row items-start justify-start gap-5 h-20">
+              <Btn
+                text="Upload PDF"
+                variant="primary"
+                size="lg"
+                onClick={() => setShowPdfPopup(true)}
+              />
+            </div>
+            <hr className="border-blue-900 w-full" />
+          </aside>
+        </div>
+
         {showPdfPopup && (
           <>
             {/* Overlay: dark + blur, but pointer-events-none so it doesn't block interaction */}
