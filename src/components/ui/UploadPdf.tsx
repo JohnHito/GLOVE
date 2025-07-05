@@ -41,7 +41,7 @@ const UploadPdf: React.FC<UploadPdfProps> = ({ apiEndpoint, onSuccess, onError }
     setError(null);
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("pdf", file);
       const res = await fetch(apiEndpoint, {
         method: "POST",
         body: formData,

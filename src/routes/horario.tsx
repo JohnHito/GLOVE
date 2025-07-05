@@ -97,7 +97,14 @@ function RouteComponent() {
                 >
                   ×
                 </button>
-                <UploadPdf apiEndpoint="/api/upload" />
+                <UploadPdf apiEndpoint="http://glovetest.test/api/cursos" // o donde esté tu ruta `store`
+                    onSuccess={(res) => {
+                      console.log("Cursos guardados:", res);
+                      // podés redirigir o mostrar mensaje aquí
+                    }}
+                    onError={(err) => {
+                      console.error("Error al procesar el PDF:", err);
+                }} />
               </div>
             </div>
           </>
