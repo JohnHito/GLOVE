@@ -13,7 +13,6 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SigninImport } from './routes/signin'
-import { Route as PerfilImport } from './routes/perfil'
 import { Route as HorarioImport } from './routes/horario'
 import { Route as CalendarioImport } from './routes/calendario'
 import { Route as AboutImport } from './routes/about'
@@ -30,12 +29,6 @@ const SignupRoute = SignupImport.update({
 const SigninRoute = SigninImport.update({
   id: '/signin',
   path: '/signin',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PerfilRoute = PerfilImport.update({
-  id: '/perfil',
-  path: '/perfil',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -95,13 +88,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HorarioImport
       parentRoute: typeof rootRoute
     }
-    '/perfil': {
-      id: '/perfil'
-      path: '/perfil'
-      fullPath: '/perfil'
-      preLoaderRoute: typeof PerfilImport
-      parentRoute: typeof rootRoute
-    }
     '/signin': {
       id: '/signin'
       path: '/signin'
@@ -126,7 +112,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/calendario': typeof CalendarioRoute
   '/horario': typeof HorarioRoute
-  '/perfil': typeof PerfilRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
 }
@@ -136,7 +121,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/calendario': typeof CalendarioRoute
   '/horario': typeof HorarioRoute
-  '/perfil': typeof PerfilRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
 }
@@ -147,37 +131,21 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/calendario': typeof CalendarioRoute
   '/horario': typeof HorarioRoute
-  '/perfil': typeof PerfilRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/calendario'
-    | '/horario'
-    | '/perfil'
-    | '/signin'
-    | '/signup'
+  fullPaths: '/' | '/about' | '/calendario' | '/horario' | '/signin' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/calendario'
-    | '/horario'
-    | '/perfil'
-    | '/signin'
-    | '/signup'
+  to: '/' | '/about' | '/calendario' | '/horario' | '/signin' | '/signup'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/calendario'
     | '/horario'
-    | '/perfil'
     | '/signin'
     | '/signup'
   fileRoutesById: FileRoutesById
@@ -188,7 +156,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CalendarioRoute: typeof CalendarioRoute
   HorarioRoute: typeof HorarioRoute
-  PerfilRoute: typeof PerfilRoute
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
 }
@@ -198,7 +165,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CalendarioRoute: CalendarioRoute,
   HorarioRoute: HorarioRoute,
-  PerfilRoute: PerfilRoute,
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
 }
@@ -217,7 +183,6 @@ export const routeTree = rootRoute
         "/about",
         "/calendario",
         "/horario",
-        "/perfil",
         "/signin",
         "/signup"
       ]
@@ -233,9 +198,6 @@ export const routeTree = rootRoute
     },
     "/horario": {
       "filePath": "horario.tsx"
-    },
-    "/perfil": {
-      "filePath": "perfil.tsx"
     },
     "/signin": {
       "filePath": "signin.tsx"

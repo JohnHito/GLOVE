@@ -65,7 +65,7 @@ function RouteComponent() {
         <div className="flex items-start gap-5">
           <Schedule courses={exampleCourses} />
           <aside className="w-full max-w-md flex flex-col gap-3">
-            <div className="flex flex-row items-start justify-start gap-5 h-20">
+            <div className="flex flex-row items-start justify-center h-18">
               <Btn
                 text="Upload PDF"
                 variant="primary"
