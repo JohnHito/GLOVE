@@ -22,27 +22,29 @@ function RouteComponent() {
   ];
 
   // Cards de ejemplo y estado para cards desde API
-  const exampleCards: CourseCardProps[] = [
-    {
-      code: "MAT101",
-      name: "Matemática Básica",
-      group: "Grupo 1",
-      schedule: ["Lunes 7:00-9:00", "Miércoles 10:00-12:00"],
-      color: "blue",
-    },
-    {
-      code: "PROG202",
-      name: "Programación Avanzada",
-      group: "Grupo 2",
-      schedule: ["Martes 8:00-10:00", "Jueves 14:00-16:00"],
-      color: "green",
-    },
-  ];
+  const exampleCards: CourseCardProps[] = [];
   const [cards, setCards] = useState<CourseCardProps[]>(exampleCards);
 
   // Simulación de fetch API (puedes reemplazar por fetch real)
   useEffect(() => {
-    // fetch('/api/courses').then(r => r.json()).then(setCards);
+    fetch('http://glovedb_0507.test/api/cursos')
+      .then(r => r.json())
+      .then((data) => {
+        // Mapear la respuesta del API a CourseCardProps
+        const colorList = ["blue", "green", "teal", "orange", "peach"];
+        const cardsFromApi = (data as any[]).map((item: any, idx: number) => ({
+          code: item.course_code,
+          name: item.name,
+          group: `Grupo ${item.group}`,
+          schedule: (item.schedule_list as string).split(',').map((s: string) => s.trim()),
+          color: colorList[idx % colorList.length] as CourseCardProps["color"],
+        }));
+        setCards(cardsFromApi);
+      })
+      .catch(() => {
+        // Si hay error, deja los de ejemplo
+        setCards(exampleCards);
+      });
   }, []);
 
   return (
