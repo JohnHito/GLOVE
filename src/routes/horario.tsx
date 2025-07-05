@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import NavVar from "../components/ui/NavVar";
 import Schedule from "../components/ui/Schedule";
 import Btn from "../components/ui/Btn";
 import UploadPdf from "../components/ui/UploadPdf";
+import { CourseCard } from "../components/ui/CourseCard";
+import type { CourseCardProps } from "../components/ui/CourseCard";
 
 export const Route = createFileRoute("/horario")({
   component: RouteComponent,
@@ -14,16 +16,35 @@ function RouteComponent() {
   // Ejemplo de cursos para el horario
   const exampleCourses = [
     { day: 0, startHour: 7, endHour: 11, name: "Matemática", color: "#2563eb" },
-    {
-      day: 0,
-      startHour: 11,
-      endHour: 21,
-      name: "Programación",
-      color: "#38a169",
-    },
+    { day: 0, startHour: 11, endHour: 21, name: "Programación", color: "#38a169" },
     { day: 4, startHour: 14, endHour: 17, name: "Física", color: "#e53e3e" },
     { day: 1, startHour: 8, endHour: 10, name: "Inglés", color: "#d97706" },
   ];
+
+  // Cards de ejemplo y estado para cards desde API
+  const exampleCards: CourseCardProps[] = [
+    {
+      code: "MAT101",
+      name: "Matemática Básica",
+      group: "Grupo 1",
+      schedule: ["Lunes 7:00-9:00", "Miércoles 10:00-12:00"],
+      color: "blue",
+    },
+    {
+      code: "PROG202",
+      name: "Programación Avanzada",
+      group: "Grupo 2",
+      schedule: ["Martes 8:00-10:00", "Jueves 14:00-16:00"],
+      color: "green",
+    },
+  ];
+  const [cards, setCards] = useState<CourseCardProps[]>(exampleCards);
+
+  // Simulación de fetch API (puedes reemplazar por fetch real)
+  useEffect(() => {
+    // fetch('/api/courses').then(r => r.json()).then(setCards);
+  }, []);
+
   return (
     <div>
       <header className="bg-blue-900 text-white py-4 px-6 flex justify-between items-center">
@@ -53,6 +74,12 @@ function RouteComponent() {
               />
             </div>
             <hr className="border-blue-900 w-full" />
+            {/* Lista de CourseCard con scroll */}
+            <div className="flex flex-col gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 350 }}>
+              {cards.map((card, idx) => (
+                <CourseCard key={card.code + idx} {...card} />
+              ))}
+            </div>
           </aside>
         </div>
 
