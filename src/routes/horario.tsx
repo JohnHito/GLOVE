@@ -77,7 +77,7 @@ function RouteComponent() {
             </div>
             <hr className="border-blue-900 w-full" />
             {/* Lista de CourseCard con scroll */}
-            <div className="flex flex-col gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 350 }}>
+            <div className="flex flex-col gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 550 }}>
               {cards.map((card, idx) => (
                 <CourseCard key={card.code + idx} {...card} />
               ))}
