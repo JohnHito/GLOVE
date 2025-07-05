@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import UserPanelPopup from "./UserPanelPopup";
+import Switch from "./Switch";
 
-const UserPanel = () => {
+interface UserPanelProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const UserPanel: React.FC<UserPanelProps> = ({ open, onClose }) => {
+  const [notif, setNotif] = useState(true);
+
   return (
-    <div className="h-screen bg-gray-100 text-gray-800 flex items-center justify-center">
+    <UserPanelPopup open={open} onClose={onClose}>
       <div className="w-full max-w-6xl px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-blue-900 text-white rounded-3xl p-8 flex flex-col items-center justify-center h-full min-h-[400px]">
           <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-4">
@@ -26,12 +35,7 @@ const UserPanel = () => {
               <span className="text-blue-900 text-xl">🔔</span>
               <span className="font-medium">Notificaciones</span>
             </div>
-            <label className="inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" checked />
-              <div className="w-11 h-6 bg-blue-200 peer-focus:outline-none rounded-full peer peer-checked:bg-blue-900 relative">
-                <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-5"></div>
-              </div>
-            </label>
+            <Switch checked={notif} onChange={setNotif} />
           </div>
 
           <div className="space-y-4">
@@ -81,7 +85,7 @@ const UserPanel = () => {
           </div>
         </div>
       </div>
-    </div>
+    </UserPanelPopup>
   );
 };
 
