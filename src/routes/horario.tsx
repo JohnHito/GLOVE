@@ -6,6 +6,7 @@ import Btn from "../components/ui/Btn";
 import UploadPdf from "../components/ui/UploadPdf";
 import { CourseCard } from "../components/ui/CourseCard";
 import type { CourseCardProps } from "../components/ui/CourseCard";
+import type { ScheduleSegmentProps } from "../components/ui/ScheduleSegment";
 
 export const Route = createFileRoute("/horario")({
   component: RouteComponent,
@@ -13,13 +14,8 @@ export const Route = createFileRoute("/horario")({
 
 function RouteComponent() {
   const [showPdfPopup, setShowPdfPopup] = useState(false);
-  // Ejemplo de cursos para el horario
-  const exampleCourses = [
-    { day: 0, startHour: 7, endHour: 11, name: "Matemática", color: "#2563eb" },
-    { day: 0, startHour: 11, endHour: 21, name: "Programación", color: "#38a169" },
-    { day: 4, startHour: 14, endHour: 17, name: "Física", color: "#e53e3e" },
-    { day: 1, startHour: 8, endHour: 10, name: "Inglés", color: "#d97706" },
-  ];
+  // Estado para los segmentos del horario
+  const [scheduleSegments, setScheduleSegments] = useState<ScheduleSegmentProps[]>([]);
 
   // Cards de ejemplo y estado para cards desde API
   const exampleCards: CourseCardProps[] = [];
@@ -47,6 +43,58 @@ function RouteComponent() {
       });
   }, []);
 
+  // Handler para agregar un curso al horario
+  const handleAddToSchedule = (course: CourseCardProps) => {
+    // Mapeo de color literal a hex
+    const colorMap = {
+      blue: "#01BCD2",
+      teal: "#95D3C5",
+      orange: "#FFA366",
+      peach: "#FFD7B0",
+      green: "#47BC82",
+    };
+    // Mapeo de letra a día
+    const dayLetterMap: Record<string, number> = {
+      L: 0, // Lunes
+      M: 1, // Martes
+      X: 2, // Miércoles
+      J: 3, // Jueves
+      V: 4, // Viernes
+      S: 5, // Sábado
+      D: 6, // Domingo
+    };
+    // Parsear cada string de schedule tipo "V: 8:00 - 10:00"
+    const segments = course.schedule.flatMap((s) => {
+      // Permitir espacios y mayúsculas/minúsculas
+      const match = s.match(/^([LMXJVSD]):\s*(\d{1,2}):\d{2}\s*-\s*(\d{1,2}):\d{2}$/i);
+      if (!match) {
+        console.warn('No se pudo parsear el horario:', s);
+        return [];
+      }
+      const [, dayLetter, start, end] = match;
+      const day = dayLetterMap[dayLetter.toUpperCase()] ?? 0;
+      const startHour = Math.max(7, Math.min(22, parseInt(start, 10)));
+      const endHour = Math.max(7, Math.min(22, parseInt(end, 10)));
+      return [{
+        day,
+        startHour,
+        endHour,
+        name: course.name,
+        color: course.color ? colorMap[course.color] : undefined,
+      }];
+    }) as ScheduleSegmentProps[];
+    if (segments.length === 0) {
+      alert('No se pudo agregar el curso al horario. Revisa el formato de los horarios.');
+    }
+    setScheduleSegments((prev) => {
+      // Evitar duplicados exactos (mismo día, hora y nombre)
+      const newSegments = segments.filter(seg =>
+        !prev.some(p => p.day === seg.day && p.startHour === seg.startHour && p.endHour === seg.endHour && p.name === seg.name)
+      );
+      return [...prev, ...newSegments];
+    });
+  };
+
   return (
     <div>
       <header className="bg-blue-900 text-white py-4 px-6 flex justify-between items-center">
@@ -65,7 +113,8 @@ function RouteComponent() {
 
       <main className="p-6 flex flex-col gap-8">
         <div className="flex items-start gap-5">
-          <Schedule courses={exampleCourses} />
+          {/* El horario ahora usa los segmentos seleccionados */}
+          <Schedule courses={scheduleSegments} />
           <aside className="w-full max-w-md flex flex-col gap-3">
             <div className="flex flex-row items-start justify-center h-18">
               <Btn
@@ -76,10 +125,12 @@ function RouteComponent() {
               />
             </div>
             <hr className="border-blue-900 w-full" />
-            {/* Lista de CourseCard con scroll */}
+            {/* Lista de CourseCard con scroll y click para agregar al horario */}
             <div className="flex flex-col gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 550 }}>
               {cards.map((card, idx) => (
-                <CourseCard key={card.code + idx} {...card} />
+                <div key={card.code + idx} onClick={() => handleAddToSchedule(card)} style={{ cursor: 'pointer' }}>
+                  <CourseCard {...card} />
+                </div>
               ))}
             </div>
           </aside>
