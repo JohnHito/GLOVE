@@ -56,8 +56,8 @@ function RouteComponent() {
     // Mapeo de letra a día
     const dayLetterMap: Record<string, number> = {
       L: 0, // Lunes
-      M: 1, // Martes
-      X: 2, // Miércoles
+      K: 1, // Martes
+      M: 2, // Miércoles
       J: 3, // Jueves
       V: 4, // Viernes
       S: 5, // Sábado
@@ -66,7 +66,7 @@ function RouteComponent() {
     // Parsear cada string de schedule tipo "V: 8:00 - 10:00"
     const segments = course.schedule.flatMap((s) => {
       // Permitir espacios y mayúsculas/minúsculas
-      const match = s.match(/^([LMXJVSD]):\s*(\d{1,2}):\d{2}\s*-\s*(\d{1,2}):\d{2}$/i);
+      const match = s.match(/^([LMJVDK]):\s*(\d{1,2}):\d{2}\s*-\s*(\d{1,2}):\d{2}$/i);
       if (!match) {
         console.warn('No se pudo parsear el horario:', s);
         return [];
