@@ -41,7 +41,10 @@ const UploadPdf: React.FC<UploadPdfProps> = ({ apiEndpoint, onSuccess, onError }
     setError(null);
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      // Cambia el nombre del campo a 'pdf' (ajusta si tu backend espera otro nombre)
+      formData.append("pdf", file);
+      // Log para depuración
+      console.log("FormData enviado:", [...formData.entries()]);
       const res = await fetch(apiEndpoint, {
         method: "POST",
         body: formData,
@@ -49,7 +52,6 @@ const UploadPdf: React.FC<UploadPdfProps> = ({ apiEndpoint, onSuccess, onError }
       if (!res.ok) throw new Error("Error al subir el PDF");
       const data = await res.json();
       onSuccess?.(data);
-      // Ejemplo: navegar a otra ruta tras éxito
       // navigate("/resultado", { state: { data } });
     } catch (err: any) {
       setError(err.message || "Error desconocido");
