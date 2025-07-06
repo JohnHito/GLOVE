@@ -18,7 +18,7 @@ function RouteComponent() {
 
   // Cargar recordatorios desde el API al montar
   React.useEffect(() => {
-    fetch("http://glovedb_0507.test/api/eventos")
+    fetch("http://glovetest.test/api/eventos")
       .then(r => r.json())
       .then(data => setEvents(
         data.map((ev: any) => {
@@ -64,14 +64,14 @@ function RouteComponent() {
     };
     // Enviar al API
     try {
-      const res = await fetch("http://glovedb_0507.test/api/eventos", {
+      const res = await fetch("http://glovetest.test/api/eventos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEvent),
       });
       if (!res.ok) throw new Error("Error al guardar recordatorio");
       // Recargar lista desde el API
-      const updated = await fetch("http://glovedb_0507.test/api/eventos").then(r => r.json());
+      const updated = await fetch("http://glovetest.test/api/eventos").then(r => r.json());
       setEvents(
         updated.map((ev: any) => {
           let end = ev.end_date;
@@ -100,9 +100,9 @@ function RouteComponent() {
     const event = events[idx];
     if (!event || !event.id) return;
     try {
-      await fetch(`http://glovedb_0507.test/api/eventos/${event.id}`, { method: "DELETE" });
+      await fetch(`http://glovetest.test/api/eventos/${event.id}`, { method: "DELETE" });
       // Recargar lista desde el API
-      const updated = await fetch("http://glovedb_0507.test/api/eventos").then(r => r.json());
+      const updated = await fetch("http://glovetest.test/api/eventos").then(r => r.json());
       setEvents(updated);
     } catch {
       alert("No se pudo eliminar el recordatorio");
