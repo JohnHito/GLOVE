@@ -1,12 +1,11 @@
 import React from "react";
 
 export interface ScheduleSegmentProps {
-  day: number; // 0 = Lunes, 6 = Domingo
-  startHour: number; // 7 = 7:00, 22 = 22:00
-  endHour: number; // 9 = 9:00, 10 = 10:00, etc.
+  day: number;
+  startHour: number;
+  endHour: number;
   name: string;
   color?: string;
-  // Props para selección y eliminación
   selected?: boolean;
   onClick?: () => void;
   onRemove?: () => void;
@@ -30,12 +29,12 @@ const ScheduleSegment: React.FC<ScheduleSegmentProps> = ({
         selected ? "ring-2 ring-blue-500" : ""
       }`}
       style={{
-        gridColumn: day + 2, // +2 porque la columna 1 es horas
+        gridColumn: day + 2,
         gridRow: `${hourToRow(startHour)} / ${hourToRow(endHour)}`,
         background: color || "#2563eb",
         zIndex: 1,
         opacity: 0.95,
-        margin: "2px", // padding visual entre bloques
+        margin: "2px",
       }}
       onClick={onClick}
     >

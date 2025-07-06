@@ -13,7 +13,6 @@ const Calendar: React.FC<CalendarProps> = ({ view, events, onDateClick }) => {
   const calendarRef = useRef<FullCalendar | null>(null);
   const [monthName, setMonthName] = useState<string>("");
 
-  // Actualiza el nombre del mes según la fecha actual del calendario
   const updateMonthName = () => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
@@ -32,10 +31,8 @@ const Calendar: React.FC<CalendarProps> = ({ view, events, onDateClick }) => {
       }
       updateMonthName();
     }
-    // eslint-disable-next-line
   }, [view]);
 
-  // Actualizar el mes cuando se navega
   const handlePrev = () => {
     if (calendarRef.current) {
       calendarRef.current.getApi().prev();

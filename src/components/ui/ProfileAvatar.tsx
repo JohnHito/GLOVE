@@ -1,12 +1,12 @@
 import React from "react";
 
 interface ProfileAvatarProps {
-  src?: string; // URL de la foto de perfil
+  src?: string;
   alt?: string;
-  size?: number; // tamaño en px
+  size?: number;
 }
 
-const DEFAULT_AVATAR = "/imgs/default_avatar.png"; // Debe existir en public/imgs/
+const DEFAULT_AVATAR = "/imgs/default_avatar.png";
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({ src, alt = "Foto de perfil", size = 40 }) => {
   return (
@@ -19,7 +19,6 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({ src, alt = "Foto de perfi
         alt={alt}
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
         loading="lazy"
-        //onClick={() => setShowPdfPopup(true)}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import React, { useState } from "react";
 import NavVar from "../components/ui/NavVar";
 import Calendar from "../components/ui/Calendar";
-import AddCourseBar from "../components/ui/AddToCalendarBar";
+import AddCourseBar from "../components/ui/AddCourseBar";
 
 export const Route = createFileRoute("/calendario")({
   component: RouteComponent,

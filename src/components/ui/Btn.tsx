@@ -48,7 +48,6 @@ export default function Btn({
       ? "appearance-none focus:outline-none text-left"
       : "inline-block appearance-none focus:outline-none text-center justify-center";
 
-  // Concatenar las clases usando template strings, filter y join
   const classes = [
     baseClass,
     variantClasses[variant],

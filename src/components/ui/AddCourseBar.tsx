@@ -24,20 +24,16 @@ const AddCourseBar: React.FC<AddCourseBarProps> = ({
   colorOptions,
   colorMap,
   placeholder = "Agregar...",
-  //icon,
   btnLabel = " + ",
 }) => {
   return (
     <div className="flex items-center bg-blue-900 rounded-xl px-4 py-3 gap-1 w-full max-w-lg shadow-md">
-      {/*
-      {icon && (
-        <span className="flex flex-row items-center mr-2">
-          {icon}
-        </span>
-      )}
-      */}
+      {}
       <div className="flex-1 flex items-center gap-3">
-        <label className="relative flex items-center cursor-pointer group" style={{ minWidth: 48 }}>
+        <label
+          className="relative flex items-center cursor-pointer group"
+          style={{ minWidth: 48 }}
+        >
           <span
             className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-white shadow group-hover:ring-2 group-hover:ring-blue-400 transition"
             style={{ background: colorMap[color as keyof typeof colorMap] }}
@@ -58,8 +54,11 @@ const AddCourseBar: React.FC<AddCourseBarProps> = ({
               </option>
             ))}
           </select>
-          <span className="pl-8 pr-1 py-1 text-blue-900 font-semibold select-none" style={{ fontWeight: 600 }}>
-            {/* Espacio para mantener el tamaño del select visual */}
+          <span
+            className="pl-8 pr-1 py-1 text-blue-900 font-semibold select-none"
+            style={{ fontWeight: 600 }}
+          >
+            {}
           </span>
         </label>
         <TxtField
