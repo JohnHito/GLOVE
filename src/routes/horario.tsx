@@ -27,7 +27,7 @@ function RouteComponent() {
 
   // Simulación de fetch API (puedes reemplazar por fetch real)
   useEffect(() => {
-    fetch("http://glovedb_0507.test/api/cursos")
+    fetch("http://glovetest.test/api/cursos")
       .then((r) => r.json())
       .then((data) => {
         // Mapear la respuesta del API a CourseCardProps
@@ -209,7 +209,7 @@ function RouteComponent() {
                   ×
                 </button>
                 <UploadPdf
-                  apiEndpoint="http://glovedb_0507.test/api/cursos" // o donde esté tu ruta `store`
+                  apiEndpoint="http://glovetest.test/api/cursos" // o donde esté tu ruta `store`
                   onSuccess={(res) => {
                     console.log("Cursos guardados:", res);
                     // podés redirigir o mostrar mensaje aquí
