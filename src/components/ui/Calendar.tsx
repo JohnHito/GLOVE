@@ -1,37 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
 interface CalendarProps {
   view: "dayGridMonth" | "dayGridWeek" | "dayGridDay";
+  events: any[];
+  onDateClick?: (arg: { dateStr: string }) => void;
 }
 
-const Calendar: React.FC<CalendarProps> = ({ view }) => {
-  const events = [
-    {
-      title: "Entrega de Tarea 1",
-      start: "2024-07-05",
-    },
-    {
-      title: "Examen Parcial",
-      start: "2024-07-10T14:00:00",
-      end: "2024-07-10T16:00:00",
-      color: "#e53e3e", // rojo
-    },
-    {
-      title: "Clase Extra",
-      start: "2024-07-12",
-      end: "2024-07-13",
-      color: "#3182ce", // azul
-    },
-    {
-      title: "Entrega Proyecto",
-      start: "2024-07-15T09:00:00",
-      end: "2024-07-15T11:00:00",
-      color: "#38a169", // verde
-    },
-  ];
-
+const Calendar: React.FC<CalendarProps> = ({ view, events, onDateClick }) => {
   const calendarRef = useRef<FullCalendar | null>(null);
   const [monthName, setMonthName] = useState<string>("");
 
@@ -97,8 +75,8 @@ const Calendar: React.FC<CalendarProps> = ({ view }) => {
         view === "dayGridMonth"
           ? "month"
           : view === "dayGridWeek"
-            ? "week"
-            : "day"
+          ? "week"
+          : "day"
       }
     >
       <div className="flex items-center justify-between gap-4 mb-4">
@@ -128,12 +106,13 @@ const Calendar: React.FC<CalendarProps> = ({ view }) => {
       </div>
       <FullCalendar
         ref={calendarRef}
-        plugins={[dayGridPlugin]}
+        plugins={[dayGridPlugin, interactionPlugin]}
         initialView={view}
         events={events}
         firstDay={1}
         headerToolbar={false}
         datesSet={updateMonthName}
+        dateClick={onDateClick}
       />
     </div>
   );
