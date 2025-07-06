@@ -25,11 +25,11 @@ const Schedule: React.FC<ScheduleProps> = ({ courses, selectedIndex, onSelectSeg
         {/* Esquina superior izquierda */}
         <div className="bg-blue-200 text-xs flex items-center justify-center font-bold border-b border-blue-200 border-r rounded-tl-xl" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
         {/* Días */}
-        {days.map((d, i) => (
+        {days.slice(0,6).map((d, i) => (
           <div
             key={d}
             className={`border-b border-blue-200 text-xs flex items-center justify-center font-semibold bg-blue-900 text-white`}
-            style={{ gridColumn: i + 1, gridRow: 1, zIndex: 20, position: 'relative' }}
+            style={{ gridColumn: i + 2, gridRow: 1, zIndex: 20, position: 'relative' }}
           >
             {d}
           </div>
