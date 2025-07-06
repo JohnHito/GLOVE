@@ -78,31 +78,58 @@ const Calendar: React.FC<CalendarProps> = ({ view, events, onDateClick }) => {
           ? "week"
           : "day"
       }
+      className="bg-blue-50 rounded-2xl shadow p-2"
     >
-      <div className="flex items-center justify-between gap-4 mb-4">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={handlePrev}
-            className="w-12 h-12 text-2xl font-bold bg-blue-100 hover:bg-blue-300 rounded-full flex items-center justify-center transition-colors"
-            dangerouslySetInnerHTML={{ __html: "&#8592;" }}
-          />
-          <h2 className="text-2xl font-bold text-center capitalize min-w-[120px]">
-            {monthName}
-          </h2>
+      <div className="flex items-center justify-between gap-4 mb-4 relative">
+        <button
+          onClick={handlePrev}
+          className="w-10 h-10 text-2xl font-bold bg-blue-200 hover:bg-blue-400 text-blue-900 rounded-full flex items-center justify-center transition-colors shadow border border-blue-300"
+          aria-label="Mes anterior"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <h2 className="text-3xl font-bold text-center capitalize min-w-[180px] text-blue-900 mx-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-fit pointer-events-none">
+          {monthName}
+        </h2>
+        <div className="flex items-center gap-2 min-w-[140px] justify-end relative z-10">
+          {!isCurrentMonth && (
+            <button
+              onClick={handleToday}
+              className="w-20 h-10 text-base font-bold bg-blue-300 hover:bg-blue-500 text-blue-900 rounded-full flex items-center justify-center transition-colors border border-blue-400 shadow mr-2"
+            >
+              Hoy
+            </button>
+          )}
           <button
             onClick={handleNext}
-            className="w-12 h-12 text-2xl font-bold bg-blue-100 hover:bg-blue-300 rounded-full flex items-center justify-center transition-colors"
-            dangerouslySetInnerHTML={{ __html: "&#8594;" }}
-          />
-        </div>
-        {!isCurrentMonth && (
-          <button
-            onClick={handleToday}
-            className="w-12 h-12 text-base font-bold bg-blue-200 hover:bg-blue-400 rounded-full flex items-center justify-center transition-colors border border-blue-400"
+            className="w-10 h-10 text-2xl font-bold bg-blue-200 hover:bg-blue-400 text-blue-900 rounded-full flex items-center justify-center transition-colors shadow border border-blue-300"
+            aria-label="Mes siguiente"
           >
-            Hoy
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </button>
-        )}
+        </div>
       </div>
       <FullCalendar
         ref={calendarRef}
@@ -113,6 +140,13 @@ const Calendar: React.FC<CalendarProps> = ({ view, events, onDateClick }) => {
         headerToolbar={false}
         datesSet={updateMonthName}
         dateClick={onDateClick}
+        height={700}
+        contentHeight={700}
+        dayMaxEventRows={3}
+        eventColor="#2563eb"
+        eventTextColor="#fff"
+        dayHeaderClassNames="bg-blue-900 text-white font-bold"
+        dayCellClassNames="bg-white border-blue-100"
       />
     </div>
   );
