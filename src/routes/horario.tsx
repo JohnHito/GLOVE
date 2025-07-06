@@ -15,7 +15,9 @@ export const Route = createFileRoute("/horario")({
 function RouteComponent() {
   const [showPdfPopup, setShowPdfPopup] = useState(false);
   // Estado para los segmentos del horario
-  const [scheduleSegments, setScheduleSegments] = useState<ScheduleSegmentProps[]>([]);
+  const [scheduleSegments, setScheduleSegments] = useState<
+    ScheduleSegmentProps[]
+  >([]);
 
   // Cards de ejemplo y estado para cards desde API
   const exampleCards: CourseCardProps[] = [];
@@ -23,8 +25,8 @@ function RouteComponent() {
 
   // Simulación de fetch API (puedes reemplazar por fetch real)
   useEffect(() => {
-    fetch('http://glovedb_0507.test/api/cursos')
-      .then(r => r.json())
+    fetch("http://glovedb_0507.test/api/cursos")
+      .then((r) => r.json())
       .then((data) => {
         // Mapear la respuesta del API a CourseCardProps
         const colorList = ["blue", "green", "teal", "orange", "peach"];
@@ -32,7 +34,9 @@ function RouteComponent() {
           code: item.course_code,
           name: item.name,
           group: `Grupo ${item.group}`,
-          schedule: (item.schedule_list as string).split(',').map((s: string) => s.trim()),
+          schedule: (item.schedule_list as string)
+            .split(",")
+            .map((s: string) => s.trim()),
           color: colorList[idx % colorList.length] as CourseCardProps["color"],
         }));
         setCards(cardsFromApi);
@@ -66,30 +70,43 @@ function RouteComponent() {
     // Parsear cada string de schedule tipo "V: 8:00 - 10:00"
     const segments = course.schedule.flatMap((s) => {
       // Permitir espacios y mayúsculas/minúsculas
-      const match = s.match(/^([LMXJVSD]):\s*(\d{1,2}):\d{2}\s*-\s*(\d{1,2}):\d{2}$/i);
+      const match = s.match(
+        /^([LMXJVSD]):\s*(\d{1,2}):\d{2}\s*-\s*(\d{1,2}):\d{2}$/i
+      );
       if (!match) {
-        console.warn('No se pudo parsear el horario:', s);
+        console.warn("No se pudo parsear el horario:", s);
         return [];
       }
       const [, dayLetter, start, end] = match;
       const day = dayLetterMap[dayLetter.toUpperCase()] ?? 0;
       const startHour = Math.max(7, Math.min(22, parseInt(start, 10)));
       const endHour = Math.max(7, Math.min(22, parseInt(end, 10)));
-      return [{
-        day,
-        startHour,
-        endHour,
-        name: course.name,
-        color: course.color ? colorMap[course.color] : undefined,
-      }];
+      return [
+        {
+          day,
+          startHour,
+          endHour,
+          name: course.name,
+          color: course.color ? colorMap[course.color] : undefined,
+        },
+      ];
     }) as ScheduleSegmentProps[];
     if (segments.length === 0) {
-      alert('No se pudo agregar el curso al horario. Revisa el formato de los horarios.');
+      alert(
+        "No se pudo agregar el curso al horario. Revisa el formato de los horarios."
+      );
     }
     setScheduleSegments((prev) => {
       // Evitar duplicados exactos (mismo día, hora y nombre)
-      const newSegments = segments.filter(seg =>
-        !prev.some(p => p.day === seg.day && p.startHour === seg.startHour && p.endHour === seg.endHour && p.name === seg.name)
+      const newSegments = segments.filter(
+        (seg) =>
+          !prev.some(
+            (p) =>
+              p.day === seg.day &&
+              p.startHour === seg.startHour &&
+              p.endHour === seg.endHour &&
+              p.name === seg.name
+          )
       );
       return [...prev, ...newSegments];
     });
@@ -126,9 +143,16 @@ function RouteComponent() {
             </div>
             <hr className="border-blue-900 w-full" />
             {/* Lista de CourseCard con scroll y click para agregar al horario */}
-            <div className="flex flex-col gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 550 }}>
+            <div
+              className="flex flex-col gap-4 mt-4 overflow-y-auto"
+              style={{ maxHeight: 550 }}
+            >
               {cards.map((card, idx) => (
-                <div key={card.code + idx} onClick={() => handleAddToSchedule(card)} style={{ cursor: 'pointer' }}>
+                <div
+                  key={card.code + idx}
+                  onClick={() => handleAddToSchedule(card)}
+                  style={{ cursor: "pointer" }}
+                >
                   <CourseCard {...card} />
                 </div>
               ))}
@@ -150,7 +174,16 @@ function RouteComponent() {
                 >
                   ×
                 </button>
-                <UploadPdf apiEndpoint="/api/upload" />
+                <UploadPdf
+                  apiEndpoint="http://glovedb_0507.test/api/cursos" // o donde esté tu ruta `store`
+                  onSuccess={(res) => {
+                    console.log("Cursos guardados:", res);
+                    // podés redirigir o mostrar mensaje aquí
+                  }}
+                  onError={(err) => {
+                    console.error("Error al procesar el PDF:", err);
+                  }}
+                />
               </div>
             </div>
           </>
