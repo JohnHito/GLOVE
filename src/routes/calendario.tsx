@@ -18,15 +18,24 @@ function RouteComponent() {
 
   // Cargar recordatorios desde el API al montar
   React.useEffect(() => {
-    fetch("http://glovetest.test/api/eventos")
+    fetch("http://glovedb_0507.test/api/eventos")
       .then(r => r.json())
       .then(data => setEvents(
-        data.map((ev: any) => ({
-          id: ev.id,
-          title: ev.title,
-          start: ev.start_date,
-          end: ev.end_date,
-        }))
+        data.map((ev: any) => {
+          let end = ev.end_date;
+          if (ev.start_date && ev.end_date && ev.start_date !== ev.end_date) {
+            // Sumar un día a end_date para visualización correcta
+            const endDateObj = new Date(ev.end_date);
+            endDateObj.setDate(endDateObj.getDate() + 1);
+            end = endDateObj.toISOString().slice(0, 10);
+          }
+          return {
+            id: ev.id,
+            title: ev.title,
+            start: ev.start_date,
+            end,
+          };
+        })
       ))
       .catch(() => setEvents([]));
   }, []);
@@ -55,21 +64,29 @@ function RouteComponent() {
     };
     // Enviar al API
     try {
-      const res = await fetch("http://glovetest.test/api/eventos", {
+      const res = await fetch("http://glovedb_0507.test/api/eventos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEvent),
       });
       if (!res.ok) throw new Error("Error al guardar recordatorio");
       // Recargar lista desde el API
-      const updated = await fetch("http://glovetest.test/api/eventos").then(r => r.json());
+      const updated = await fetch("http://glovedb_0507.test/api/eventos").then(r => r.json());
       setEvents(
-        updated.map((ev: any) => ({
-          id: ev.id,
-          title: ev.title,
-          start: ev.start_date,
-          end: ev.end_date,
-        }))
+        updated.map((ev: any) => {
+          let end = ev.end_date;
+          if (ev.start_date && ev.end_date && ev.start_date !== ev.end_date) {
+            const endDateObj = new Date(ev.end_date);
+            endDateObj.setDate(endDateObj.getDate() + 1);
+            end = endDateObj.toISOString().slice(0, 10);
+          }
+          return {
+            id: ev.id,
+            title: ev.title,
+            start: ev.start_date,
+            end,
+          };
+        })
       );
     } catch (e) {
       alert("No se pudo guardar el recordatorio");
@@ -83,9 +100,9 @@ function RouteComponent() {
     const event = events[idx];
     if (!event || !event.id) return;
     try {
-      await fetch(`http://glovetest.test/api/eventos/${event.id}`, { method: "DELETE" });
+      await fetch(`http://glovedb_0507.test/api/eventos/${event.id}`, { method: "DELETE" });
       // Recargar lista desde el API
-      const updated = await fetch("http://glovetest.test/api/eventos").then(r => r.json());
+      const updated = await fetch("http://glovedb_0507.test/api/eventos").then(r => r.json());
       setEvents(updated);
     } catch {
       alert("No se pudo eliminar el recordatorio");
