@@ -97,6 +97,7 @@ function RouteComponent() {
           startHour,
           endHour,
           name: course.name,
+          group: course.group, // <-- Asegura que el grupo se pase al segmento
           color: course.color ? colorMap[course.color] : undefined,
         },
       ];
