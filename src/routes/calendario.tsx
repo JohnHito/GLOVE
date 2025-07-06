@@ -69,7 +69,7 @@ function RouteComponent() {
       </header>
 
       <main className="flex px-8 py-6 gap-8">
-        <section className="flex-1 bg-white rounded-2xl p-6 border border-blue-900">
+        <section className="flex-1 bg-white">
           <Calendar
             view="dayGridMonth"
             events={events}
