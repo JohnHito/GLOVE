@@ -14,23 +14,23 @@ interface ScheduleProps {
 
 const Schedule: React.FC<ScheduleProps> = ({ courses, selectedIndex, onSelectSegment, onRemoveSegment }) => {
   return (
-    <div className="relative w-full" style={{ minHeight: 700 }}>
+    <div className="relative w-full bg-white" style={{ minHeight: 700, height: 700 }}>
       <div
-        className="grid border rounded-lg bg-white"
+        className="grid rounded-xl border border-blue-200 overflow-hidden"
         style={{
           gridTemplateColumns: `80px repeat(7, 1fr)`,
           gridTemplateRows: `40px repeat(${hours.length}, 40px)` // +1 row for header
         }}
       >
         {/* Esquina superior izquierda */}
-        <div className="bg-blue-200 text-xs flex items-center justify-center font-bold border-b border-gray-200 border-r" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
+        <div className="bg-blue-200 text-xs flex items-center justify-center font-bold border-b border-blue-200 border-r rounded-tl-xl" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
         {/* Días */}
         {days.map((d, i) => (
-          <div key={d} className="border-b border-gray-200 text-xs flex items-center justify-center font-semibold bg-blue-100" style={{ gridColumn: i + 2, gridRow: 1 }}>{d}</div>
+          <div key={d} className="border-b border-blue-200 text-xs flex items-center justify-center font-semibold bg-blue-900 text-white" style={{ gridColumn: i + 2, gridRow: 1 }}>{d}</div>
         ))}
         {/* Horas */}
         {hours.map((h, i) => (
-          <div key={h} className="border-b border-gray-200 text-xs flex items-center justify-center font-semibold bg-blue-50" style={{ gridColumn: 1, gridRow: i + 2 }}>{h}:00</div>
+          <div key={h} className="border-b border-blue-100 text-xs flex items-center justify-center font-semibold bg-blue-200 text-blue-900" style={{ gridColumn: 1, gridRow: i + 2 }}>{h}:00</div>
         ))}
         {/* Cursos */}
         {courses.map((c, i) => (
