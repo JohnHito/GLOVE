@@ -90,7 +90,12 @@ function RouteComponent() {
       const [, dayLetter, start, end] = match;
       const day = dayLetterMap[dayLetter.toUpperCase()] ?? 0;
       const startHour = Math.max(7, Math.min(22, parseInt(start, 10)));
-      const endHour = Math.max(7, Math.min(22, parseInt(end, 10)));
+      let  endHour = Math.max(7, Math.min(22, parseInt(end, 10)));
+      
+      const endsAt = s.match(/-(\d{1,2}):(\d{2})$/); // s es el string tipo "V 13:00-13:50"
+      if (endsAt && parseInt(endsAt[2], 10) > 0) {
+        endHour = Math.min(endHour + 1, 22); // no pasar de 10pm
+      }
       return [
         {
           day,
