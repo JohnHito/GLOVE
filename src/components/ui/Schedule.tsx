@@ -18,7 +18,7 @@ const Schedule: React.FC<ScheduleProps> = ({ courses, selectedIndex, onSelectSeg
       <div
         className="grid rounded-xl border border-blue-200 overflow-hidden"
         style={{
-          gridTemplateColumns: `80px repeat(7, 1fr)`,
+          gridTemplateColumns: `80px repeat(6, 1fr)`,
           gridTemplateRows: `40px repeat(${hours.length}, 40px)` // +1 row for header
         }}
       >
@@ -26,11 +26,45 @@ const Schedule: React.FC<ScheduleProps> = ({ courses, selectedIndex, onSelectSeg
         <div className="bg-blue-200 text-xs flex items-center justify-center font-bold border-b border-blue-200 border-r rounded-tl-xl" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
         {/* Días */}
         {days.map((d, i) => (
-          <div key={d} className="border-b border-blue-200 text-xs flex items-center justify-center font-semibold bg-blue-900 text-white" style={{ gridColumn: i + 2, gridRow: 1 }}>{d}</div>
+          <div
+            key={d}
+            className={`border-b border-blue-200 text-xs flex items-center justify-center font-semibold bg-blue-900 text-white`}
+            style={{ gridColumn: i + 1, gridRow: 1, zIndex: 20, position: 'relative' }}
+          >
+            {d}
+          </div>
         ))}
         {/* Horas */}
         {hours.map((h, i) => (
-          <div key={h} className="border-b border-blue-100 text-xs flex items-center justify-center font-semibold bg-blue-200 text-blue-900" style={{ gridColumn: 1, gridRow: i + 2 }}>{h}:00</div>
+          <div
+            key={h}
+            className={"border-b border-blue-100 text-xs flex items-center justify-center font-semibold bg-blue-200 text-blue-900"}
+            style={{ gridColumn: 1, gridRow: i + 2 }}
+          >
+            {h}:00
+          </div>
+        ))}
+        {/* Fila de almuerzo: una sola fila que cubre de Lunes a Sábado */}
+        <div
+          className={"bg-gray-200 border-b border-blue-200 flex items-center justify-center text-gray-700 font-bold text-xs"}
+          style={{ gridColumn: 2, gridColumnEnd: 8, gridRow: 12 - 7 + 2, zIndex: 20, position: 'relative' }}
+        >
+          ALMUERZO
+        </div>
+        {/* Líneas divisoras entre columnas de días */}
+        {[1,2,3,4,5].map(i => (
+          <div
+            key={"divider-"+i}
+            style={{
+              gridColumn: i+2,
+              gridRow: 1,
+              gridRowEnd: hours.length+2,
+              zIndex: 10,
+              pointerEvents: 'none',
+              position: 'relative'
+            }}
+            className="border-l-2 border-blue-50"
+          />
         ))}
         {/* Cursos */}
         {courses.map((c, i) => (
