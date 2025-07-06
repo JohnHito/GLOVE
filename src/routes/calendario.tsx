@@ -16,6 +16,21 @@ function RouteComponent() {
   const [events, setEvents] = useState<any[]>([]);
   const [selectedTaskIdx, setSelectedTaskIdx] = useState<number | null>(null);
 
+  // Cargar recordatorios desde el API al montar
+  React.useEffect(() => {
+    fetch("http://glovedb_0507.test/api/recordatorios")
+      .then(r => r.json())
+      .then(data => setEvents(
+        data.map((ev: any) => ({
+          id: ev.id,
+          title: ev.title,
+          start: ev.start_date,
+          end: ev.end_date,
+        }))
+      ))
+      .catch(() => setEvents([]));
+  }, []);
+
   const colorOptions = [
     { name: "Azul", value: "blue", color: "#01BCD2" },
     { name: "Verde", value: "green", color: "#47BC82" },
@@ -31,24 +46,50 @@ function RouteComponent() {
     green: "#47BC82",
   };
 
-  const handleAddCourse = () => {
+  const handleAddCourse = async () => {
     if (courseInput.trim() === "" || !startDate) return;
-    setEvents([
-      ...events,
-      {
-        title: courseInput,
-        start: startDate,
-        ...(endDate ? { end: endDate } : {}),
-        color: colorMap[colorInput as keyof typeof colorMap],
-      },
-    ]);
+    const newEvent = {
+      title: courseInput,
+      start_date: startDate,
+      end_date: endDate || startDate,
+    };
+    // Enviar al API
+    try {
+      const res = await fetch("http://glovedb_0507.test/api/recordatorios", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newEvent),
+      });
+      if (!res.ok) throw new Error("Error al guardar recordatorio");
+      // Recargar lista desde el API
+      const updated = await fetch("http://glovedb_0507.test/api/recordatorios").then(r => r.json());
+      setEvents(
+        updated.map((ev: any) => ({
+          id: ev.id,
+          title: ev.title,
+          start: ev.start_date,
+          end: ev.end_date,
+        }))
+      );
+    } catch (e) {
+      alert("No se pudo guardar el recordatorio");
+    }
     setCourseInput("");
     setStartDate("");
     setEndDate("");
   };
 
-  const handleRemoveTask = (idx: number) => {
-    setEvents(events => events.filter((_, i) => i !== idx));
+  const handleRemoveTask = async (idx: number) => {
+    const event = events[idx];
+    if (!event || !event.id) return;
+    try {
+      await fetch(`http://glovedb_0507.test/api/recordatorios/${event.id}`, { method: "DELETE" });
+      // Recargar lista desde el API
+      const updated = await fetch("http://glovedb_0507.test/api/recordatorios").then(r => r.json());
+      setEvents(updated);
+    } catch {
+      alert("No se pudo eliminar el recordatorio");
+    }
     setSelectedTaskIdx(null);
   };
 
@@ -108,7 +149,7 @@ function RouteComponent() {
           <hr className="border-blue-900 w-full mt-4" />
           <div className="flex flex-col gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 900 }}>
             {events.map((ev, idx) => (
-              <div key={ev.title + ev.start + idx} className="relative group" onClick={() => setSelectedTaskIdx(idx)}>
+              <div key={(ev.id ?? ev.title) + ev.start + idx} className="relative group" onClick={() => setSelectedTaskIdx(idx)}>
                 <div
                   style={{
                     background: ev.color || colorMap.blue,
