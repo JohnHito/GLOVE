@@ -18,6 +18,8 @@ function RouteComponent() {
   const [scheduleSegments, setScheduleSegments] = useState<
     ScheduleSegmentProps[]
   >([]);
+  // Estado para el índice del segmento seleccionado
+  const [selectedSegmentIndex, setSelectedSegmentIndex] = useState<number | null>(null);
 
   // Cards de ejemplo y estado para cards desde API
   const exampleCards: CourseCardProps[] = [];
@@ -30,15 +32,25 @@ function RouteComponent() {
       .then((data) => {
         // Mapear la respuesta del API a CourseCardProps
         const colorList = ["blue", "green", "teal", "orange", "peach"];
-        const cardsFromApi = (data as any[]).map((item: any, idx: number) => ({
-          code: item.course_code,
-          name: item.name,
-          group: `Grupo ${item.group}`,
-          schedule: (item.schedule_list as string)
-            .split(",")
-            .map((s: string) => s.trim()),
-          color: colorList[idx % colorList.length] as CourseCardProps["color"],
-        }));
+        const cardsFromApi = (data as any[]).map((item: any, idx: number) => {
+          let scheduleArr: string[] = [];
+          try {
+            // Intenta parsear el string como JSON array
+            scheduleArr = JSON.parse(item.schedule_list);
+          } catch {
+            // Si falla, usa split por coma como fallback
+            scheduleArr = (item.schedule_list as string).split(",");
+          }
+          // Limpia espacios y filtra vacíos
+          scheduleArr = scheduleArr.map((s) => s.trim()).filter(Boolean);
+          return {
+            code: item.course_code,
+            name: item.name,
+            group: `Grupo ${item.group}`,
+            schedule: scheduleArr,
+            color: colorList[idx % colorList.length] as CourseCardProps["color"],
+          };
+        });
         setCards(cardsFromApi);
       })
       .catch(() => {
@@ -67,10 +79,10 @@ function RouteComponent() {
       S: 5, // Sábado
       D: 6, // Domingo
     };
-    // Parsear cada string de schedule tipo "V: 8:00 - 10:00"
+    // Parsear cada string de schedule tipo "V 17:00-20:50" o "V: 17:00-20:50"
     const segments = course.schedule.flatMap((s) => {
-      // Permitir espacios y mayúsculas/minúsculas
-      const match = s.match(/^([LMXJVSD]):\s*(\d{1,2}):\d{2}\s*-\s*(\d{1,2}):\d{2}$/i);
+      // Permitir espacios, dos puntos y mayúsculas/minúsculas
+      const match = s.match(/^([LMXJKVSD]):?\s*(\d{1,2}):\d{2}\s*-\s*(\d{1,2}):\d{2}$/i);
       if (!match) {
         console.warn("No se pudo parsear el horario:", s);
         return [];
@@ -93,6 +105,19 @@ function RouteComponent() {
       alert(
         "No se pudo agregar el curso al horario. Revisa el formato de los horarios."
       );
+      return;
+    }
+    // Verificar colisión antes de agregar
+    const hasCollision = segments.some(seg =>
+      scheduleSegments.some(existing =>
+        existing.day === seg.day &&
+        // Chequeo de traslape de intervalos
+        Math.max(existing.startHour, seg.startHour) < Math.min(existing.endHour, seg.endHour)
+      )
+    );
+    if (hasCollision) {
+      alert("Este curso se traslapa con otro ya agregado en el horario.");
+      return;
     }
     setScheduleSegments((prev) => {
       // Evitar duplicados exactos (mismo día, hora y nombre)
@@ -108,6 +133,12 @@ function RouteComponent() {
       );
       return [...prev, ...newSegments];
     });
+  };
+
+  // Handler para eliminar un segmento del horario
+  const handleRemoveSegment = (index: number) => {
+    setScheduleSegments((prev) => prev.filter((_, i) => i !== index));
+    setSelectedSegmentIndex(null);
   };
 
   return (
@@ -129,7 +160,12 @@ function RouteComponent() {
       <main className="p-6 flex flex-col gap-8">
         <div className="flex items-start gap-5">
           {/* El horario ahora usa los segmentos seleccionados */}
-          <Schedule courses={scheduleSegments} />
+          <Schedule 
+            courses={scheduleSegments}
+            selectedIndex={selectedSegmentIndex}
+            onSelectSegment={setSelectedSegmentIndex}
+            onRemoveSegment={handleRemoveSegment}
+          />
           <aside className="w-full max-w-md flex flex-col gap-3">
             <div className="flex flex-row items-start justify-center h-18">
               <Btn

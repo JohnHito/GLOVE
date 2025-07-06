@@ -7,9 +7,12 @@ const hours = Array.from({ length: 16 }, (_, i) => 7 + i); // 7:00 a 22:00
 
 interface ScheduleProps {
   courses: ScheduleSegmentProps[];
+  selectedIndex?: number | null;
+  onSelectSegment?: (index: number) => void;
+  onRemoveSegment?: (index: number) => void;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ courses }) => {
+const Schedule: React.FC<ScheduleProps> = ({ courses, selectedIndex, onSelectSegment, onRemoveSegment }) => {
   return (
     <div className="relative w-full" style={{ minHeight: 700 }}>
       <div
@@ -31,7 +34,13 @@ const Schedule: React.FC<ScheduleProps> = ({ courses }) => {
         ))}
         {/* Cursos */}
         {courses.map((c, i) => (
-          <ScheduleSegment key={i} {...c} />
+          <ScheduleSegment
+            key={i}
+            {...c}
+            selected={selectedIndex === i}
+            onClick={() => onSelectSegment && onSelectSegment(i)}
+            onRemove={() => onRemoveSegment && onRemoveSegment(i)}
+          />
         ))}
       </div>
     </div>
