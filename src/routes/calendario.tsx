@@ -14,6 +14,7 @@ function RouteComponent() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [events, setEvents] = useState<any[]>([]);
+  const [selectedTaskIdx, setSelectedTaskIdx] = useState<number | null>(null);
 
   const colorOptions = [
     { name: "Azul", value: "blue", color: "#01BCD2" },
@@ -44,6 +45,11 @@ function RouteComponent() {
     setCourseInput("");
     setStartDate("");
     setEndDate("");
+  };
+
+  const handleRemoveTask = (idx: number) => {
+    setEvents(events => events.filter((_, i) => i !== idx));
+    setSelectedTaskIdx(null);
   };
 
   return (
@@ -102,7 +108,7 @@ function RouteComponent() {
           <hr className="border-blue-900 w-full mt-4" />
           <div className="flex flex-col gap-4 mt-4 overflow-y-auto" style={{ maxHeight: 900 }}>
             {events.map((ev, idx) => (
-              <div key={ev.title + ev.start + idx}>
+              <div key={ev.title + ev.start + idx} className="relative group" onClick={() => setSelectedTaskIdx(idx)}>
                 <div
                   style={{
                     background: ev.color || colorMap.blue,
@@ -112,6 +118,7 @@ function RouteComponent() {
                     minWidth: 250,
                     boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
                     fontWeight: 600,
+                    cursor: 'pointer',
                   }}
                 >
                   <div style={{ fontSize: 15, fontWeight: 700 }}>{ev.title}</div>
@@ -119,6 +126,15 @@ function RouteComponent() {
                     {ev.start}
                     {ev.end ? ` - ${ev.end}` : ""}
                   </div>
+                  {selectedTaskIdx === idx && (
+                    <button
+                      className="absolute top-2 right-4 text-xl text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center shadow hover:bg-red-700 transition z-10"
+                      onClick={e => { e.stopPropagation(); handleRemoveTask(idx); }}
+                      aria-label="Eliminar tarea"
+                    >
+                      ×
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

@@ -37,16 +37,16 @@ const AddCourseBar: React.FC<AddCourseBarProps> = ({
       )}
       */}
       <div className="flex-1 flex items-center gap-3">
-        <div className="relative flex items-center">
+        <label className="relative flex items-center cursor-pointer group" style={{ minWidth: 48 }}>
           <span
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-white shadow"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-white shadow group-hover:ring-2 group-hover:ring-blue-400 transition"
             style={{ background: colorMap[color as keyof typeof colorMap] }}
           />
           <select
             value={color}
             onChange={onColorChange}
-            className="appearance-none pl-8 pr-1 py-1 rounded text-blue-900 font-semibold focus:outline-none cursor-pointer"
-            style={{ fontWeight: 600 }}
+            className="opacity-0 absolute left-0 top-0 w-full h-full cursor-pointer"
+            style={{ minWidth: 48, minHeight: 32 }}
           >
             {colorOptions.map((opt) => (
               <option
@@ -54,10 +54,14 @@ const AddCourseBar: React.FC<AddCourseBarProps> = ({
                 value={opt.value}
                 style={{ background: opt.color, color: "#222" }}
               >
+                {opt.name}
               </option>
             ))}
           </select>
-        </div>
+          <span className="pl-8 pr-1 py-1 text-blue-900 font-semibold select-none" style={{ fontWeight: 600 }}>
+            {/* Espacio para mantener el tamaño del select visual */}
+          </span>
+        </label>
         <TxtField
           value={value}
           onChange={onChange}
