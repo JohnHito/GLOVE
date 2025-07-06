@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
 
 interface UploadPdfProps {
   apiEndpoint: string;
@@ -12,7 +11,6 @@ const UploadPdf: React.FC<UploadPdfProps> = ({ apiEndpoint, onSuccess, onError }
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();

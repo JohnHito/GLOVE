@@ -10,9 +10,9 @@ const UserPanelPopup: React.FC<UserPanelPopupProps> = ({ open, onClose, children
   if (!open) return null;
   return (
     <>
-      {/* Overlay: dark + blur, pointer-events-none so it doesn't block interaction */}
+      {}
       <div className="fixed inset-0 bg-black/40 backdrop-blur-sm pointer-events-none z-40" />
-      {/* Modal: above overlay, interactive */}
+      {}
       <div className="fixed inset-0 flex items-center justify-center z-50">
         <div className="bg-white rounded-3xl p-0 shadow-lg relative w-full max-w-4xl overflow-hidden">
           <button

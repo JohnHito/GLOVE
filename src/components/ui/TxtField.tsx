@@ -17,7 +17,6 @@ export default function TxtField({
   className,
   ...props
 }: TxtFieldProps) {
-  // Selección de clases por variante
   const variantClasses = {
     normal: "bg-gray-100 rounded-md p-3 text-sm outline-none",
     pill: "bg-white text-black rounded-full px-6 py-2 text-sm focus:outline-none",
